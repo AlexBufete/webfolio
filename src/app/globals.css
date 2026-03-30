@@ -1,0 +1,41 @@
+@import "tailwindcss";
+
+@theme {
+  --color-bg-primary: #0d0d1a;
+  --color-bg-card: rgba(255, 255, 255, 0.03);
+  --color-bg-input: rgba(255, 255, 255, 0.05);
+  --color-border-subtle: rgba(255, 255, 255, 0.06);
+  --color-border-input: rgba(255, 255, 255, 0.1);
+  --color-text-heading: #f0f0f0;
+  --color-text-body: #888888;
+  --color-text-muted: #555555;
+  --color-accent-teal: #5dcaa5;
+  --color-accent-blue: #85b7eb;
+  --color-accent-purple: #afa9ec;
+  --color-accent-coral: #f0997b;
+  --color-accent-amber: #fac775;
+  --color-accent-teal-bg: rgba(93, 202, 165, 0.12);
+  --color-accent-blue-bg: rgba(133, 183, 235, 0.12);
+  --color-accent-purple-bg: rgba(175, 169, 236, 0.12);
+  --color-accent-coral-bg: rgba(240, 153, 123, 0.12);
+  --color-accent-amber-bg: rgba(250, 199, 117, 0.12);
+  --color-accent-teal-border: rgba(93, 202, 165, 0.15);
+  --color-accent-blue-border: rgba(133, 183, 235, 0.15);
+  --color-accent-purple-border: rgba(175, 169, 236, 0.15);
+  --color-accent-amber-border: rgba(250, 199, 117, 0.15);
+  --font-mono: "Courier New", "Courier", monospace;
+}
+
+html {
+  scroll-behavior: smooth;
+}
+
+body {
+  background-color: var(--color-bg-primary);
+  color: var(--color-text-body);
+}
+
+::selection {
+  background-color: rgba(93, 202, 165, 0.3);
+  color: #f0f0f0;
+}
