@@ -223,12 +223,12 @@ export default function StackPage() {
         >
           Get in touch
         </a>
-        <a
+        {/*<a
           href="/resume"
           className="rounded-lg border border-white/15 px-6 py-2.5 text-sm text-[var(--color-text-heading)] transition-colors hover:border-white/30"
         >
           View resume
-        </a>
+        </a>*/}
       </div>
     </section>
   );
