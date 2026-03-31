@@ -25,7 +25,6 @@ export function About() {
             they can depend on.
           </p>
           <p className="text-sm leading-relaxed text-[var(--color-text-body)]">
-            While located in the Bay, I am targeting the Austin, TX market.
             Every system I build is designed to be maintainable, documented, and
             production-ready.
           </p>
