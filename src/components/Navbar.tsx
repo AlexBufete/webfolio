@@ -43,12 +43,12 @@ export function Navbar() {
           >
             stack
           </Link>
-          {/*<Link
+          <Link
             href="/resume"
             className="text-sm text-[var(--color-text-body)] transition-colors hover:text-[var(--color-text-heading)]"
           >
             resume
-          </Link>*/}
+          </Link>
           <Link
             href="/contact"
             className="rounded-md bg-[var(--color-accent-teal)] px-4 py-1.5 text-xs font-semibold text-[var(--color-bg-primary)] transition-opacity hover:opacity-90"

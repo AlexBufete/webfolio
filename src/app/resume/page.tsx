@@ -3,295 +3,256 @@
 import { useState } from "react";
 import { TerminalCommand } from "@/components/TerminalCommand";
 
-const roles = [
-  { id: "syseng", label: "Systems Engineer", file: "/resume_syseng.pdf" },
-  { id: "qa", label: "QA Engineer", file: "/resume_qa.pdf" },
-  { id: "av", label: "A/V & IT Support", file: "/resume_av.pdf" },
-] as const;
+const summary =
+  "Versatile Systems and QA Engineer with a background in IT infrastructure, automation, and system reliability. Experienced in managing Linux and Windows servers, virtualized environments, and enterprise network configurations. Skilled in test automation, hardware validation, and A/V systems integration across broadcast, enterprise, and healthcare environments. Passionate about building efficient, well-documented solutions that bridge software, hardware, and network operations.";
 
-type RoleId = (typeof roles)[number]["id"];
+const skills = [
+  "Python",
+  "C++",
+  "Selenium",
+  "Bash",
+  "Windows Server",
+  "Arch Linux",
+  "Debian",
+  "RHEL",
+  "VMware ESXi",
+  "Proxmox",
+  "MariaDB",
+  "PostgreSQL",
+  "Nmap",
+  "SSH",
+  "Telnet",
+  "RS232",
+  "Wireshark",
+  "Git",
+  "Zephyr Scale",
+  "JIRA",
+  "Postman",
+  "Confluence",
+  "NetSuite",
+  "Zendesk",
+  "Slack",
+  "Active Directory",
+  "Microsoft Azure",
+  "Ubiquiti",
+  "Cisco Switches",
+  "AVoIP",
+  "HDBaseT",
+  "HDMI/SDI",
+  "Control Systems",
+  "PXE",
+];
 
-interface Experience {
-  title: string;
-  company: string;
-  location: string;
-  dates: string;
-  bullets: string[];
+const experience = [
+  {
+    title: "Owner / IT Systems Engineer",
+    company: "Aystra Technologies llc",
+    location: "",
+    dates: "Jul 2025 — Current",
+    bullets: [
+      "Rebuilt a failed Windows Server environment for a dental practice, restoring Eaglesoft and full operations from validated backups within 48 hours",
+      "Configured and validated backup and recovery processes to support data integrity and rapid system restoration",
+      "Managed on-premise IT infrastructure for healthcare offices, including Active Directory, Group Policy, DNS/DHCP, and Ubiquiti UniFi network deployments",
+      "Engineered and maintained Proxmox VE (ZFS) environments, running LXC containers and VMs for both production and lab workloads",
+      "Deployed full-stack applications and infrastructure (Next.js, Node.js, Nginx, SSL, Cloudflare) with automated system hardening and repeatable provisioning scripts",
+      "Designed scalable infrastructure and observability pipelines using Terraform, Ansible, K3s/Kubernetes, Docker, Prometheus, Grafana, and a self-hosted data platform (PostgreSQL, JupyterHub, Superset)",
+    ],
+  },
+  {
+    title: "QA Engineer",
+    company: "Atlona",
+    location: "",
+    dates: "Sep 2022 — Jul 2025",
+    bullets: [
+      "Developed automated test frameworks using Python and Selenium, reducing test cycle time by 17%",
+      "Performed functional, regression, and UX testing on NPI hardware and WebGUI systems across Agile and Waterfall environments",
+      "Authored and managed test cases, plans, and defect tracking in JIRA / Zephyr Scale, delivering clear, actionable reporting",
+      "Partnered with R&D teams to reproduce, document, and resolve software, firmware, and hardware defects",
+      "Built and maintained test environments, including firmware deployment, network configuration, and hardware provisioning",
+      "Led end-to-end system validation and QA processes (AVoIP, video matrix systems), including calibration, signal verification, and reliability testing",
+      "Configured and maintained AVoIP networks, matrix switchers, and control systems for enterprise and broadcast clients.",
+      "Implemented firmware updates and performed system imaging and network addressing for field deployment environments",
+      "Performed hands-on QC and calibration for HDBaseT, AVoIP, and HDMI switching products",
+    ],
+  },
+  {
+    title: "Technical Support Engineer",
+    company: "Blackmagic Design",
+    location: "",
+    dates: "Nov 2020 — Sep 2022",
+    bullets: [
+      "Supported enterprise clients (FOX, NFL, Universal Studios) with system integration, network diagnostics, and hardware-level troubleshooting.",
+      "Provided advanced support via CLI, remote access (SSH, Telnet), and firmware-level analysis for broadcast and post-production systems.",
+      "Diagnosed network and software issues across Windows, macOS, and Linux environments, escalating systemic issues to engineering for patching.",
+      "Conducted system imaging, hardware repairs, and system validation testing with standard turnaround compliance.",
+      "Provided advanced technical support to enterprise clients (e.g., major broadcasters and studios) across networking, CLI troubleshooting, and broadcast hardware systems",
+      "Diagnosed, tested, and repaired professional video equipment in a lab environment, maintaining a 4–8 day turnaround",
+      "Delivered phone and email support, guiding customers through complex troubleshooting with clear communication and critical thinking",
+      "Collaborated with system integrators to deploy and configure production studios, including networking, security, and access control",
+      "Specialized in camera and desktop video hardware, supporting high-impact production environments",
+      "Escalated and coordinated critical, production-blocking issues with PMs and engineering teams to drive resolution",
+    ],
+  },
+  {
+    title: "Enterprise Support Technician",
+    company: "Facebook – Milestone Technologies Contract",
+    location: "",
+    dates: "Aug 2019 — Nov 2020",
+    bullets: [
+      "Delivered enterprise IT support in a high-SLA environment, meeting 2-day service targets and 30-minute executive deployment requirements",
+      "Performed system imaging, device provisioning, and lifecycle management for laptops and mobile devices, ensuring standardized configurations",
+      "Executed onsite deployments and deskside support, including workstation setup, troubleshooting, and rapid incident resolution in live user environments",
+      "Maintained asset inventory accuracy through structured data entry and validation within enterprise management systems",
+      "Managed user access and device permissions using internal tooling, supporting secure and efficient endpoint operations",
+    ],
+  },
+];
+
+{
+  /*const additional =
+  "Designed and deployed IT infrastructures for small businesses, including Windows and Linux servers, network topology setup, Active Directory integration, and data backup systems for dental and healthcare environments. Installed and configured professional A/V systems, including networked control hardware, video routing, and small-office server setups. Provided on-site support and training for client installations.";
+*/
 }
+const ACCENT = "var(--color-accent-teal)";
+const ACCENT_BG = "var(--color-accent-teal-bg)";
+const ACCENT_BORDER = "var(--color-accent-teal-border)";
 
-interface RoleData {
-  summary: string;
-  skills: string[];
-  experience: Experience[];
-  additional: string;
+const earlierSections = [
+  {
+    id: "construction",
+    label: "HVAC & Construction",
+    dates: "2016 — 2019",
+    accent: "var(--color-accent-amber)",
+    accentBg: "var(--color-accent-amber-bg)",
+    accentBorder: "var(--color-accent-amber-border)",
+    description:
+      "(2016-2017) Lion's Heating & Cooling - Digital Systems Programmer, (2017-2019) CHP Construction - Carpenter",
+    bullets: [
+      "This is where I developed most of my work ethic. Time is money and sometimes there's no replacement for real physical labor.",
+      "Sustained a fast-paced environment by staying ahead of tasks and resolving unplanned obstacles in quick succession.",
+      "Made decisions related to performance, scheduling, delivery, logistics and quality control.",
+      "Performed in all operations of general construction, such as Electrical, HVAC, Mechanical, Carpentry.",
+      "Learned and assisted with calibrations, troubleshooting, and installation of digital HVAC systems.",
+      "Assisted with general labor such as demolition, installation, and maintenance of ductwork and HVAC components.",
+    ],
+  },
+  {
+    id: "first",
+    label: "The Home Depot",
+    dates: "2016",
+    accent: "var(--color-accent-coral)",
+    accentBg: "var(--color-accent-coral-bg)",
+    accentBorder: "var(--color-accent-coral-border)",
+    description: "Electrical Associate",
+    bullets: [
+      "Maintained the electrical department and assisted customers with questions or concerns.",
+      "Learned to operate all machinery and equipment in the Home Depot.",
+      "This was the first building block of my professional foundation.",
+    ],
+  },
+];
+
+function EarlierExperience() {
+  const [openSection, setOpenSection] = useState<string | null>(null);
+
+  const EA = "var(--color-accent-purple)";
+  const EA_BG = "var(--color-accent-amber-bg)";
+  const EA_BORDER = "var(--color-accent-amber-border)";
+
+  const toggle = (id: string) => setOpenSection(openSection === id ? null : id);
+
+  return (
+    <div className="mb-8">
+      <h2
+        className="mb-4 text-xs font-medium uppercase tracking-widest"
+        style={{ color: EA }}
+      >
+        Earlier experience
+      </h2>
+      <p className="mb-4 text-xs text-[var(--color-text-muted)]">
+        Before tech — where it started.
+      </p>
+      <div className="flex flex-col gap-3">
+        {earlierSections.map((section) => {
+          const isOpen = openSection === section.id;
+          return (
+            <div
+              key={section.id}
+              className="cursor-pointer overflow-hidden rounded-xl border bg-[var(--color-bg-card)] transition-all"
+              style={{
+                borderColor: isOpen
+                  ? section.accentBorder
+                  : "var(--color-border-subtle)",
+              }}
+              onClick={() => toggle(section.id)}
+            >
+              <div className="flex items-center justify-between p-4">
+                <div className="flex items-center gap-3">
+                  <div
+                    className="flex h-7 w-7 items-center justify-center rounded-md"
+                    style={{ background: section.accentBg }}
+                  >
+                    <div
+                      className="h-3 w-3 rounded-sm border-2"
+                      style={{ borderColor: section.accent }}
+                    />
+                  </div>
+                  <span
+                    className="text-sm font-semibold"
+                    style={{ color: section.accent }}
+                  >
+                    {section.label}
+                  </span>
+                </div>
+                <div className="flex items-center gap-3">
+                  <span className="font-[var(--font-mono)] text-[11px] text-[var(--color-text-muted)]">
+                    {section.dates}
+                  </span>
+                  <span
+                    className="text-xs transition-transform"
+                    style={{
+                      color: section.accent,
+                      transform: isOpen ? "rotate(90deg)" : "rotate(0deg)",
+                    }}
+                  >
+                    ▶
+                  </span>
+                </div>
+              </div>
+
+              {isOpen && (
+                <div
+                  className="border-t px-4 pb-4 pt-3"
+                  style={{ borderColor: section.accentBorder }}
+                >
+                  <p className="mb-3 text-xs leading-relaxed text-[var(--color-text-body)]">
+                    {section.description}
+                  </p>
+                  <ul className="flex flex-col gap-2">
+                    {section.bullets.map((bullet, i) => (
+                      <li
+                        key={i}
+                        className="flex gap-2 text-xs leading-relaxed text-[var(--color-text-body)]"
+                      >
+                        <span
+                          className="mt-1.5 h-1 w-1 flex-shrink-0 rounded-full"
+                          style={{ background: section.accent }}
+                        />
+                        {bullet}
+                      </li>
+                    ))}
+                  </ul>
+                </div>
+              )}
+            </div>
+          );
+        })}
+      </div>
+    </div>
+  );
 }
-
-const data: Record<RoleId, RoleData> = {
-  syseng: {
-    summary:
-      "Versatile Systems Engineer with a background in IT infrastructure, automation, and system reliability. Experienced in managing Linux and Windows servers, virtualized environments, and enterprise network configurations. Adept at diagnosing and optimizing systems for performance, scalability, and security. Passionate about building efficient, automated solutions that bridge software, hardware, and network operations.",
-    skills: [
-      "Python",
-      "C++",
-      "Selenium",
-      "Windows Server",
-      "Arch Linux",
-      "Debian",
-      "RHEL",
-      "VMware ESXi",
-      "Proxmox",
-      "MariaDB",
-      "PostgreSQL",
-      "Nmap",
-      "SSH",
-      "Telnet",
-      "RS232",
-      "Wireshark",
-      "Git",
-      "Zephyr Scale",
-      "JIRA",
-      "Confluence",
-      "Box",
-      "NetSuite",
-      "Zendesk",
-      "Slack",
-      "Office Suites",
-      "Active Directory",
-      "Microsoft Azure",
-      "Ubiquiti",
-    ],
-    experience: [
-      {
-        title: "Systems Engineer / QA Automation Engineer",
-        company: "Atlona",
-        location: "San Jose, CA",
-        dates: "Jan 2023 — Jul 2025",
-        bullets: [
-          "Designed, deployed, and maintained test and production server environments running on Linux and Windows Server using VMware ESXi and Proxmox VE.",
-          "Automated system validation and device communication workflows using Python, Selenium, and REST APIs, improving system reliability and testing efficiency by 17%.",
-          "Integrated systems into Active Directory and managed user access permissions through Azure AD and Group Policy.",
-          "Performed network configuration, monitoring, and troubleshooting using Wireshark, Nmap, and SSH across AVoIP devices and internal lab systems.",
-          "Collaborated with R&D and IT teams to deploy and secure internal services, including web servers, databases (MariaDB, PostgreSQL), and file management systems.",
-          "Managed configuration baselines, documentation, and version control via Git, JIRA, and Confluence.",
-        ],
-      },
-      {
-        title: "A/V Systems & Quality Engineer",
-        company: "Atlona",
-        location: "San Jose, CA",
-        dates: "Sep 2022 — Jan 2023",
-        bullets: [
-          "Configured and maintained enterprise-grade A/V and control systems, ensuring reliable operation of video matrix switchers, AVoIP networks, and control processors.",
-          "Implemented firmware updates and performed system imaging and network addressing for QA and field deployment environments.",
-          "Worked with cross-functional IT teams to align QA system requirements with network and server infrastructure.",
-          "Contributed to the development of standardized processes and deployment procedures for lab and field systems.",
-        ],
-      },
-      {
-        title: "Technical Support Engineer",
-        company: "Blackmagic Design",
-        location: "Fremont, CA",
-        dates: "Nov 2020 — Sep 2022",
-        bullets: [
-          "Supported enterprise clients (FOX, NFL, Universal Studios) with system integration, network diagnostics, and hardware-level troubleshooting.",
-          "Provided advanced support via CLI, remote access (SSH, Telnet), and firmware-level analysis for broadcast and post-production systems.",
-          "Diagnosed network and software issues across Windows, macOS, and Linux environments, escalating systemic issues to engineering for patching.",
-          "Conducted system imaging, hardware repairs, and system validation testing with standard turnaround compliance.",
-        ],
-      },
-    ],
-    additional:
-      "Designed and deployed IT infrastructures for small businesses, including Windows and Linux servers, network topology setup, Active Directory integration, and data backup systems for dental and office environments.",
-  },
-
-  qa: {
-    summary:
-      "Detail-driven QA Engineer experienced in software and hardware validation across A/V, networking, and embedded systems. Skilled in test automation, regression analysis, and root-cause diagnostics. Adept at bridging cross-functional communication between development, QA, and operations to deliver stable, high-quality products.",
-    skills: [
-      "Python",
-      "C++",
-      "Selenium",
-      "Bash",
-      "Windows Server",
-      "Arch Linux",
-      "Debian",
-      "RHEL",
-      "VMware ESXi",
-      "Proxmox",
-      "MariaDB",
-      "PostgreSQL",
-      "Nmap",
-      "SSH",
-      "Telnet",
-      "RS232",
-      "Wireshark",
-      "Git",
-      "Zephyr Scale",
-      "JIRA",
-      "Postman",
-      "Confluence",
-      "NetSuite",
-      "Zendesk",
-      "Slack",
-      "Active Directory",
-      "Microsoft Azure",
-      "Ubiquiti",
-      "Cisco Switches",
-      "PXE",
-    ],
-    experience: [
-      {
-        title: "QA Engineer",
-        company: "Atlona",
-        location: "San Jose, CA",
-        dates: "Jan 2023 — Jul 2025",
-        bullets: [
-          "Designed and implemented automated testing using Python and Selenium, improving test cycle time by 17%.",
-          "Conducted functional, regression, and UX testing across NPI hardware and WebGUI interfaces under both Agile and Waterfall methodologies.",
-          "Authored and maintained test cases, test plans, and defect reports in JIRA / Zephyr Scale, providing actionable insight to stakeholders.",
-          "Collaborated with R&D to reproduce, document, and track software and hardware defects through resolution.",
-          "Supported test environment setup, including firmware deployment, network configuration, and hardware provisioning.",
-          "Led QA reviews for usability and system stability, driving product improvement and user satisfaction.",
-        ],
-      },
-      {
-        title: "A/V Quality Engineer",
-        company: "Atlona",
-        location: "San Jose, CA",
-        dates: "Sep 2022 — Jan 2023",
-        bullets: [
-          "Executed end-to-end validation of video matrix switchers, AVoIP, and control systems, ensuring compliance with design specifications.",
-          "Performed product calibration, signal verification, and burn-in testing for reliability.",
-          "Contributed to establishing department QA procedures and documentation standards.",
-          "Collaborated with firmware and hardware engineers to resolve system-level interoperability issues.",
-          "Proactively identified and proposed solutions to improve product quality, services, and processes.",
-        ],
-      },
-      {
-        title: "Technical Support Engineer",
-        company: "Blackmagic Design",
-        location: "Fremont, CA",
-        dates: "Nov 2020 — Sep 2022",
-        bullets: [
-          "Supported enterprise clients (FOX, NFL, Universal Studios) with system integration, network diagnostics, and hardware-level troubleshooting.",
-          "Provided advanced support via CLI, remote access (SSH, Telnet), and firmware-level analysis for broadcast and post-production systems.",
-          "Diagnosed network and software issues across Windows, macOS, and Linux environments, escalating systemic issues to engineering for patching.",
-          "Conducted system imaging, hardware repairs, and system validation testing with standard turnaround compliance.",
-        ],
-      },
-    ],
-    additional:
-      "Designed and deployed IT infrastructures for small businesses, including Windows & Linux servers, network topology setup, Active Directory integration, and data backup systems for healthcare environments.",
-  },
-
-  av: {
-    summary:
-      "Experienced A/V Systems Engineer skilled in configuration, testing, and technical support of professional-grade audiovisual and control systems. Proven ability to integrate hardware, software, and networking solutions across live production, broadcast, and enterprise environments. Known for problem-solving, clear communication, and ensuring consistent performance under demanding conditions.",
-    skills: [
-      "Python",
-      "C++",
-      "Selenium",
-      "Bash",
-      "Windows Server",
-      "Arch Linux",
-      "Debian",
-      "RHEL",
-      "VMware ESXi",
-      "Proxmox",
-      "MariaDB",
-      "PostgreSQL",
-      "Nmap",
-      "SSH",
-      "Telnet",
-      "RS232",
-      "Wireshark",
-      "Git",
-      "Zephyr Scale",
-      "JIRA",
-      "NetSuite",
-      "Zendesk",
-      "Slack",
-      "AVoIP",
-      "HDBaseT",
-      "HDMI/SDI",
-      "Control Systems",
-      "Signal Flow Analysis",
-      "Ubiquiti",
-      "Cisco Switches",
-    ],
-    experience: [
-      {
-        title: "A/V QA Engineer",
-        company: "Atlona",
-        location: "San Jose, CA",
-        dates: "Jan 2023 — Jul 2025",
-        bullets: [
-          "Configured and maintained AVoIP networks, matrix switchers, and control systems for enterprise and broadcast clients.",
-          "Conducted signal flow validation, latency analysis, and interoperability testing across IP-based systems.",
-          "Supported firmware deployment and hardware imaging, ensuring proper device configuration and field readiness.",
-          "Managed test environments simulating conference, broadcast, and residential installations to validate real-world reliability.",
-          "Collaborated with software engineers to refine WebGUI and control interface usability.",
-          "Led QA reviews for usability and system stability, driving product improvement and user satisfaction.",
-        ],
-      },
-      {
-        title: "A/V Systems Quality Engineer",
-        company: "Atlona",
-        location: "San Jose, CA",
-        dates: "Sep 2022 — Jan 2023",
-        bullets: [
-          "Executed end-to-end validation of video matrix switchers, AVoIP, and control systems, ensuring compliance with design specifications.",
-          "Performed hands-on QC and calibration for HDBaseT, AVoIP, and HDMI switching products.",
-          "Conducted firmware updates, system burn-ins, and functional verification to validate compliance with design specs.",
-          "Collaborated with firmware and hardware engineers to resolve system-level interoperability issues.",
-          "Authored reports and feedback for product management and engineering teams to improve A/V reliability.",
-        ],
-      },
-      {
-        title: "Technical Support Engineer",
-        company: "Blackmagic Design",
-        location: "Fremont, CA",
-        dates: "Nov 2020 — Sep 2022",
-        bullets: [
-          "Supported enterprise clients (FOX, NFL, Universal Studios) with system integration, network diagnostics, and hardware-level troubleshooting.",
-          "Troubleshot signal routing, control software, and hardware connectivity across Windows, macOS, and Linux platforms.",
-          "Conducted lab-level testing and diagnostics on returned units, performing firmware re-flashing, board swaps, and component-level validation.",
-          "Delivered client support via phone and email, ensuring accurate resolution and professional service. Providing on-site support if needed.",
-        ],
-      },
-    ],
-    additional:
-      "Installed and configured professional A/V systems, including networked control hardware, video routing, and small-office server setups. Provided on-site support and training for client installations.",
-  },
-};
-
-const roleColors: Record<
-  RoleId,
-  { accent: string; accentBg: string; border: string }
-> = {
-  syseng: {
-    accent: "var(--color-accent-teal)",
-    accentBg: "var(--color-accent-teal-bg)",
-    border: "var(--color-accent-teal-border)",
-  },
-  qa: {
-    accent: "var(--color-accent-purple)",
-    accentBg: "var(--color-accent-purple-bg)",
-    border: "var(--color-accent-purple-border)",
-  },
-  av: {
-    accent: "var(--color-accent-blue)",
-    accentBg: "var(--color-accent-blue-bg)",
-    border: "var(--color-accent-blue-border)",
-  },
-};
 
 export default function ResumePage() {
-  const [activeRole, setActiveRole] = useState<RoleId>("syseng");
-  const role = data[activeRole];
-  const colors = roleColors[activeRole];
-  const activeRoleMeta = roles.find((r) => r.id === activeRole)!;
-
   return (
     <section className="mx-auto max-w-5xl px-6 py-16">
       <TerminalCommand command="cat resume.md" />
@@ -303,6 +264,8 @@ export default function ResumePage() {
             Alexander N. Bufete
           </h1>
           <div className="mt-2 flex flex-wrap gap-x-4 gap-y-1 font-[var(--font-mono)] text-xs text-[var(--color-text-muted)]">
+            <span>abufete@pm.me</span>
+            <span>(510) 993-4306</span>
             <a
               href="https://linkedin.com/in/abufete"
               target="_blank"
@@ -314,7 +277,7 @@ export default function ResumePage() {
           </div>
         </div>
         <a
-          href={activeRoleMeta.file}
+          href="/resume.pdf"
           download
           className="flex items-center gap-2 self-start rounded-lg border border-white/15 px-4 py-2 text-sm text-[var(--color-text-heading)] transition-colors hover:border-white/30"
         >
@@ -337,40 +300,16 @@ export default function ResumePage() {
         </a>
       </div>
 
-      {/* Role selector */}
-      <div className="mb-8 mt-6 flex gap-2">
-        {roles.map((r) => {
-          const isActive = r.id === activeRole;
-          const c = roleColors[r.id];
-          return (
-            <button
-              key={r.id}
-              onClick={() => setActiveRole(r.id)}
-              className="rounded-lg px-4 py-2 font-[var(--font-mono)] text-xs transition-all"
-              style={{
-                background: isActive ? c.accentBg : "rgba(255,255,255,0.03)",
-                color: isActive ? c.accent : "var(--color-text-muted)",
-                border: isActive
-                  ? `1px solid ${c.border}`
-                  : "1px solid rgba(255,255,255,0.06)",
-              }}
-            >
-              {r.label}
-            </button>
-          );
-        })}
-      </div>
-
       {/* Summary */}
       <div
-        className="mb-8 rounded-xl p-5"
+        className="mb-8 mt-6 rounded-xl p-5"
         style={{
           background: "var(--color-bg-card)",
-          borderLeft: `3px solid ${colors.accent}`,
+          borderLeft: `3px solid ${ACCENT}`,
         }}
       >
         <p className="text-sm leading-relaxed text-[var(--color-text-body)]">
-          {role.summary}
+          {summary}
         </p>
       </div>
 
@@ -378,18 +317,18 @@ export default function ResumePage() {
       <div className="mb-8">
         <h2
           className="mb-4 text-xs font-medium uppercase tracking-widest"
-          style={{ color: colors.accent }}
+          style={{ color: ACCENT }}
         >
           Skills
         </h2>
         <div className="flex flex-wrap gap-1.5">
-          {role.skills.map((skill) => (
+          {skills.map((skill) => (
             <span
               key={skill}
               className="rounded px-2.5 py-1 font-[var(--font-mono)] text-[10px]"
               style={{
-                background: colors.accentBg,
-                color: colors.accent,
+                background: ACCENT_BG,
+                color: ACCENT,
               }}
             >
               {skill}
@@ -402,17 +341,17 @@ export default function ResumePage() {
       <div className="mb-8">
         <h2
           className="mb-6 text-xs font-medium uppercase tracking-widest"
-          style={{ color: colors.accent }}
+          style={{ color: ACCENT }}
         >
           Experience
         </h2>
         <div className="flex flex-col gap-6">
-          {role.experience.map((exp, i) => (
+          {experience.map((exp, i) => (
             <div
               key={i}
               className="rounded-xl border bg-[var(--color-bg-card)] p-5"
               style={{
-                borderColor: `color-mix(in srgb, ${colors.accent} 12%, transparent)`,
+                borderColor: `color-mix(in srgb, ${ACCENT} 12%, transparent)`,
               }}
             >
               <div className="mb-1 flex flex-col gap-1 sm:flex-row sm:items-center sm:justify-between">
@@ -423,8 +362,8 @@ export default function ResumePage() {
                   {exp.dates}
                 </span>
               </div>
-              <p className="mb-3 text-xs" style={{ color: colors.accent }}>
-                {exp.company} — {exp.location}
+              <p className="mb-3 text-xs" style={{ color: ACCENT }}>
+                {exp.company}
               </p>
               <ul className="flex flex-col gap-2">
                 {exp.bullets.map((bullet, j) => (
@@ -434,7 +373,7 @@ export default function ResumePage() {
                   >
                     <span
                       className="mt-1.5 h-1 w-1 flex-shrink-0 rounded-full"
-                      style={{ background: colors.accent }}
+                      style={{ background: ACCENT }}
                     />
                     {bullet}
                   </li>
@@ -446,24 +385,27 @@ export default function ResumePage() {
       </div>
 
       {/* Additional experience */}
-      <div className="mb-8">
+      {/*      <div className="mb-8">
         <h2
           className="mb-4 text-xs font-medium uppercase tracking-widest"
-          style={{ color: colors.accent }}
+          style={{ color: ACCENT }}
         >
           Additional Experience
         </h2>
         <p className="text-xs leading-relaxed text-[var(--color-text-body)]">
-          {role.additional}
+          {additional}
         </p>
       </div>
+*/}
+      {/* Earlier experience (expandable, amber) */}
+      <EarlierExperience />
 
       {/* CTA */}
       <div className="flex gap-3 border-t border-[var(--color-border-subtle)] pt-6">
         <a
           href="/contact"
           className="rounded-lg px-6 py-2.5 text-sm font-semibold text-[var(--color-bg-primary)] transition-opacity hover:opacity-90"
-          style={{ background: colors.accent }}
+          style={{ background: ACCENT }}
         >
           Get in touch
         </a>
